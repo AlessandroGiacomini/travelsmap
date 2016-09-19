@@ -9,6 +9,7 @@ function init() {
         self.reviews = ko.observableArray();
         self.location = ko.observableArray();
         self.resizeSelected = ko.observable();
+        var clickMarkerBool = false;
 
         // Google Maps Api to create the Map
         var centerMap = {lat: 45.79692, lng: 6.96896000};
@@ -17,15 +18,26 @@ function init() {
             zoom: 2
         });
         
-        self.cityfound = function(searchId) {
-            self.core(searchId, null);
+        self.currMarkName = ko.observable();
+        self.currMarkPos = ko.observable();
+        self.infoVis = ko.observable(true);
+        self.articleStrLink = ko.observableArray([]);
+        self.urlName = ko.observable();
+        self.urlLink = ko.observable();
+        self.articleStrLink_access = ko.observableArray();
+
+        self.cityfound = function(searchId,elem) {
+            self.core(searchId, elem);
         };
 
         // Show wikipedia info about a clicked marker
-        self.core = function(searchId, marker) {            
-            var $geninfo = $('#geninfo-links');
+        self.core = function(searchId, marker) { 
+
+            self.currMarkName(marker.name);
+            self.currMarkPos(marker.position);
+            self.articleStrLink_access([]);
+           
             var $wikiElem = $('#wikipedia-links');
-            $geninfo.text("");
             $wikiElem.text("");
             var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchId + '&format=json&callback=wikiCallback';
             var wikiRequestTimeout = setTimeout(function(){
@@ -37,31 +49,45 @@ function init() {
                url: wikiUrl,
                dataType: "jsonp",
                jsonp: "callback",
-               }).done(function(response ) {
+               }).done(function(response) {
                     var articleList = response[1];
                     for (var i = 0; i < articleList.length; i++) {
                         var articleStr = articleList[i];
-                        var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                        $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+                        var url = 'http://en.wikipedia.org/wiki/' + articleStr;   
+                        self.urlLink(url);
+                        self.urlName(articleStr);
+                        self.articleStrLink_access.push(
+                            {
+                                urlLink : self.urlLink(),
+                                urlName : self.urlName(),
+                            }
+                        )
                     };
                     clearTimeout(wikiRequestTimeout);
             });
 
             var selectedMarker = null;
 
-            // Add some info about the marker selected on a infowindow and in the page
-            self.citiesmarkers().forEach(function(currentmarker) {
+             // Add some info about the marker selected on a infowindow and in the page
+            var onClickMarker = self.citiesmarkers().forEach(function(currentmarker) {
 
-                if (currentmarker.infoId === searchId) {
+                if (currentmarker.infoId === marker.infoId) {
                     selectedMarker = currentmarker;
                     currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-                    $geninfo.append('<li>' + 'City: ' + currentmarker.infoId + '</li>' +
-                                    '<li>' + 'Position: ' + currentmarker.position + '</li>');
-                    if (infowindow) {
+                    
+                    self.currMarkName(currentmarker.infoId);
+                    self.currMarkPos(currentmarker.position);
+                    self.infoVis(true);
+         
+                    if (self.clickMarkerBool === false){
+                        self.map.setZoom(4);
+                        self.map.setCenter(currentmarker.position);
+                        if (infowindow) {
                         infowindow.close();
+                        }
                     }
-                    self.map.setZoom(4);
-                    self.map.setCenter(currentmarker.position);
+                    else{
+                    self.clickMarkerBool = false;}
                 } 
                 else {
                     currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
@@ -84,6 +110,12 @@ function init() {
         self.citiesfilter = ko.observable('');
         // Show only the results relative to the typing marker searched
         self.citiesfilter.subscribe(function(itemToSearch) {
+            if (infowindow) {
+                        infowindow.close();
+            }
+            
+            //self.infoVis(false);
+
             itemToSearch = itemToSearch.toLowerCase();
             var bool = false;
             ko.utils.arrayForEach(self.citiesmarkers(), 
@@ -103,7 +135,6 @@ function init() {
                         self.citiesmarkers([]);
                         self.citiesmarkers(checked);}
         });
-
 
         // Create a location with purpose (travel or live city), name (city), 
         // latitude (city), longitude (city), search_id (id used to retrive information)
@@ -136,6 +167,9 @@ function init() {
                     infowindow.close();
                 }
                 var marker = this;
+                self.infoVis(true);
+                // self.currMarkName(marker.infoId);
+                // self.currMarkPos(marker.position);
                 if (marker.getAnimation() !== null) {
                     marker.setAnimation(null);
                 } else {
@@ -159,16 +193,15 @@ function init() {
                                 '<h1>' + 'Position: ' + marker.position + '</h1>'+
                                 '</div>'+
                                 '</div>'
-
                 });
 
                 infowindow.open(map, marker); 
+                self.clickMarkerBool=true;
                 self.core(this.name, this);
             });
             return location;
         };
 
-        
         var life = [
           ['Sydney', -33.890542, 151.274856, 'Sydney, Nuovo Galles del Sud'],
           ['Rome', 41.90278, 12.49637, 'Colosseo, Rome, Italy'],
