@@ -1,0 +1,68 @@
+#map {
+    height: 100%;
+    width:100%;
+}
+
+#resize {
+    position: absolute;
+    z-index: 5;
+    top: 13px;
+    right: 12px;
+    font-weight: bold;
+}
+
+#search {
+    top: 86px;
+    position: absolute;
+    z-index: 5;
+    padding: 20px;
+    background-color: #1E90FF;
+    color: white;
+    overflow: scroll;
+}
+
+#search-container {
+    position: absolute;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    margin: 10px 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 14px;
+}
+
+a {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media screen and (orientation: portrait){
+	#search {
+		bottom: 0;
+		width: 100%;
+	    height: 25%;
+	    overflow: scroll;
+	}
+}
+
+@media screen and (orientation: landscape){
+	#search {
+        overflow: scroll;
+	    height: 100%;
+	}
+}

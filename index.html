@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Alessandro's Travels Map</title>
+    <meta name="author" content="Alessandro Giacomini">
+    <meta name="description" content="Alessandro's Travels Map">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+    <div id="resize">
+        <button data-bind="click: resizeButtonClicked" value="resizeSelected">Unzoom Map</button>
+    </div>
+    <div id="search">
+        <input class="form-control" placeholder="Search" type="text" data-bind='value:citiesfilter, valueUpdate: "afterkeydown"'>
+        <ul data-bind="foreach: citiesmarkers">
+            <a data-bind="click: function(data, event) { $parent.cityfound(infoId, data, event) }, attr: {href: infoId }">
+                <li data-bind="text: name, visible:getVisible()"></li>
+            </a>
+        </ul>
+        <div class="info-container">
+                <hr>
+                <h3 id="geninfo-header">Infos about the City:</h3>
+                <ul id="geninfo-links"></ul>
+                <h3 id="wikipedia-header">Wikipedia City Links:</h3>
+                <ul id="wikipedia-links"></ul>
+        </div>
+    </div>
+    <div id="map">
+    </div>
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBjIFHr5xExLJInIN6gJxSvRdLMk1k7Mw&callback=init"
+    async defer></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/knockout.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
