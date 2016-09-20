@@ -150,7 +150,7 @@ var ViewModel = function() {
                             infowindow.close();
                         }
                         // Google Maps Street View Api used to fill an infowindow on the marker
-                        var streetviewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + currentmarker.infoId + '';
+                        var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + currentmarker.infoId + '';
                         infowindow = new google.maps.InfoWindow({
                         content:'<div id="content">'+
                                 '<div id="siteNotice">'+
@@ -262,7 +262,7 @@ var ViewModel = function() {
                 }
 
                 // Google Maps Street View Api used to fill an infowindow on the marker
-                var streetviewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + marker.infoId + '';
+                var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + marker.infoId + '';
                 infowindow = new google.maps.InfoWindow({
                     content: '<div id="content">'+
                                 '<div id="siteNotice">'+
