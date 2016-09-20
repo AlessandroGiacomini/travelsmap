@@ -1,5 +1,7 @@
 # Project: Alessandro's Travels Map - Alessandro Giacomini
 
+Live [here](https://alessandrogiacomini.github.io/travelsmap/)
+
 I love travel.
 This is the map of all my travels including the city where I lived. 
 We get location data, photos from Google Street View and Wikipedia articles about the cities. Cities in the map can be searched by the city name.
