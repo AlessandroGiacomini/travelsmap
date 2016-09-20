@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 
 // MODEL
@@ -103,7 +103,7 @@ var ViewModel = function() {
             var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchId + '&format=json&callback=wikiCallback';
             var wikiRequestTimeout = setTimeout(function(){
                 $wikiElem.text("failed to get wikipedia resources");
-            }, 8000);
+            }, 2000);
 
             // Wikipedia Api to retrive wiki links about the marker
             $.ajax({
