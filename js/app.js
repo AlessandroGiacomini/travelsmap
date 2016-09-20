@@ -136,7 +136,7 @@ var ViewModel = function() {
 
                 if (currentmarker.infoId === marker.infoId) {
                     selectedMarker = currentmarker;
-                    currentmarker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
+                    currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 
                     self.currMarkName(currentmarker.infoId);
                     self.currMarkPos(currentmarker.position);
@@ -170,13 +170,13 @@ var ViewModel = function() {
                     self.clickMarkerBool = false;}
                 }
                 else {
-                    currentmarker.setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
+                    currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
                 }
                 if ((currentmarker.name == "Sydney") ||
                     (currentmarker.name == "Rome") ||
                     (currentmarker.name == "New York")) {
                     var image = {
-                        url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                        url: 'http://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
                         size: new google.maps.Size(20, 32),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(0, 32)
@@ -229,7 +229,7 @@ var ViewModel = function() {
             };
 
             var image = {
-                url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+                url: 'http://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
                 size: new google.maps.Size(20, 32),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(0, 32)
@@ -239,7 +239,7 @@ var ViewModel = function() {
             self.citiesmarkers()[self.citiesmarkers().length - 1].setAnimation(null);
 
             if (purpose=="travels")
-                self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
+                self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
             if (purpose=="life")
                 self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon(image);
 
@@ -257,7 +257,7 @@ var ViewModel = function() {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function() {
                         marker.setAnimation(null);
-                        marker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
                     }, 1000);
                 }
 
