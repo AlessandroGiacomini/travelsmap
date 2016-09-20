@@ -100,7 +100,7 @@ var ViewModel = function() {
 
             var $wikiElem = $('#wikipedia-links');
             $wikiElem.text("");
-            var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchId + '&format=json&callback=wikiCallback';
+            var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + searchId + '&format=json&callback=wikiCallback';
             var wikiRequestTimeout = setTimeout(function(){
                 $wikiElem.text("failed to get wikipedia resources");
             }, 8000);
@@ -114,7 +114,7 @@ var ViewModel = function() {
                     var articleList = response[1];
                     for (var i = 0; i < articleList.length; i++) {
                         var articleStr = articleList[i];
-                        var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                        var url = 'https://en.wikipedia.org/wiki/' + articleStr;
                         self.urlLink(url);
                         self.urlName(articleStr);
                         self.articleStrLink_access.push(
@@ -136,7 +136,7 @@ var ViewModel = function() {
 
                 if (currentmarker.infoId === marker.infoId) {
                     selectedMarker = currentmarker;
-                    currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+                    currentmarker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
 
                     self.currMarkName(currentmarker.infoId);
                     self.currMarkPos(currentmarker.position);
@@ -150,7 +150,7 @@ var ViewModel = function() {
                             infowindow.close();
                         }
                         // Google Maps Street View Api used to fill an infowindow on the marker
-                        var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + currentmarker.infoId + '';
+                        var streetviewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + currentmarker.infoId + '';
                         infowindow = new google.maps.InfoWindow({
                         content:'<div id="content">'+
                                 '<div id="siteNotice">'+
@@ -170,7 +170,7 @@ var ViewModel = function() {
                     self.clickMarkerBool = false;}
                 }
                 else {
-                    currentmarker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+                    currentmarker.setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
                 }
                 if ((currentmarker.name == "Sydney") ||
                     (currentmarker.name == "Rome") ||
@@ -239,7 +239,7 @@ var ViewModel = function() {
             self.citiesmarkers()[self.citiesmarkers().length - 1].setAnimation(null);
 
             if (purpose=="travels")
-                self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+                self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png');
             if (purpose=="life")
                 self.citiesmarkers()[self.citiesmarkers().length - 1].setIcon(image);
 
@@ -257,12 +257,12 @@ var ViewModel = function() {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function() {
                         marker.setAnimation(null);
-                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+                        marker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
                     }, 1000);
                 }
 
                 // Google Maps Street View Api used to fill an infowindow on the marker
-                var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + marker.infoId + '';
+                var streetviewUrl = 'https://maps.googleapis.com/maps/api/streetview?size=300x200&location=' + marker.infoId + '';
                 infowindow = new google.maps.InfoWindow({
                     content: '<div id="content">'+
                                 '<div id="siteNotice">'+
